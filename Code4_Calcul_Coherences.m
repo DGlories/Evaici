@@ -6,6 +6,7 @@
 %%-----------------------------------------------------------------------------------------------
 
 clear;
+clc;
 dossier1 = uigetdir(matlabroot,'Choisir le dossier contenant les datas');
 dossier = uigetdir(matlabroot,'Choisir le dossier denregistrement');
 F=dir(fullfile(dossier1,'DATA*.mat'));
