@@ -58,14 +58,21 @@ for x=1:1:length(F) % Pour chaque sujet
                             debut=1;
                         end
                         
+                        
+                        if mode{m} == 'LEN' | mode{m} == 'SHO' 
+                        
+                            MatricewithoutNaN=OutNaN(DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data);
+                           
+                        end
+                        
                         % Pour chaque muscle
                         for j=65:67
-                            EMG_TEMP = DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data(j,:,:);
+                            EMG_TEMP = MatricewithoutNaN(j,:,:);
                             EMG=permute(EMG_TEMP,[3,2,1]);
                             
                             % Pour chaque electrode
                             for k=1:64
-                                EEG_TEMP = DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data(k,:,:);
+                                EEG_TEMP = MatricewithoutNaN(k,:,:);
                                 EEG=permute(EEG_TEMP,[3,2,1]);
                                 
                                 
@@ -77,7 +84,7 @@ for x=1:1:length(F) % Pour chaque sujet
                                 [t,S1,S2,freq,WPS_S1,WPS_S2,WCPS,WPD,SRoWCS,WMSC,WMSCwSWCPS] = TFCA_Calculate(EEG(:,debut:end),EMG(:,debut:end),srate,7,30,10,0);
                                 
                                 % figure
-                                close;
+                                close(gcf)
                                 TFCA_Display(t,S1,'EEG','volt',S2,'EMG','volt',freq,WPS_S1,WPS_S2,WCPS,SRoWCS,WMSC,[],[],0,[]) ;
                                 
                                 % zoomer axe
@@ -141,14 +148,21 @@ for x=1:1:length(F) % Pour chaque sujet
                             debut=1;
                         end
                         
+                        
+                        if mode{m} == 'LEN' | mode{m} == 'SHO'
+                            
+                            MatricewithoutNaN=OutNaN(DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data);
+                            
+                        end
+                        
                         % Pour chaque muscle
                         for j=65:66
-                            EMG_TEMP = DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data(j,:,:);
+                            EMG_TEMP = MatricewithoutNaN(j,:,:);
                             EMG=permute(EMG_TEMP,[3,2,1]);
                             
                             % Pour chaque second muscle
                             for k=66:67
-                                EEG_TEMP = DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data(k,:,:);
+                                EEG_TEMP = MatricewithoutNaN(k,:,:);
                                 EEG=permute(EEG_TEMP,[3,2,1]);
                                 
                                 
