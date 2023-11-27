@@ -60,25 +60,23 @@ for x=1:1:length(F) % Pour chaque sujet
                         
                         
                         if mode{m} == 'LEN' | mode{m} == 'SHO' 
-                        
                             MatricewithoutNaN=OutNaN(DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data);
-                           
+                        else
+                            MatricewithoutNaN=(DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data);                           
                         end
                         
                         % Pour chaque muscle
-                        for j=65:67
+                        for j=65
                             EMG_TEMP = MatricewithoutNaN(j,:,:);
                             EMG=permute(EMG_TEMP,[3,2,1]);
                             
                             % Pour chaque electrode
-                            for k=1:64
+                            for k=13
                                 EEG_TEMP = MatricewithoutNaN(k,:,:);
                                 EEG=permute(EEG_TEMP,[3,2,1]);
                                 
-                                
-                                % centrer le signal pour respecter les hypothèses de zeromean pour l'ensemble des étapes de calcul
-                                %%%%%%%%%%%%%%%%%% ???????????????????? --> joseph
-                                
+                                EEG_visualize
+                                                                
                                 
                                 % calcul cohérence
                                 [t,S1,S2,freq,WPS_S1,WPS_S2,WCPS,WPD,SRoWCS,WMSC,WMSCwSWCPS] = TFCA_Calculate(EEG(:,debut:end),EMG(:,debut:end),srate,7,30,10,0);
