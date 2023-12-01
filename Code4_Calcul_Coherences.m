@@ -75,7 +75,7 @@ for x=1:1:length(F) % Pour chaque sujet
                                 EEG_TEMP = MatricewithoutNaN(k,:,:);
                                 EEG=permute(EEG_TEMP,[3,2,1]);
                                 
-                                EEG_visualize
+                                % EEG_visualize;
                                                                 
                                 
                                 % calcul cohérence
@@ -107,6 +107,9 @@ for x=1:1:length(F) % Pour chaque sujet
                                 %save
                                 saveas(gcf,strcat(nom,'_CMC_',(mode{m}),'_',(vitesse{v}),'_muscle_',DATA_EPOCH_REJECT.Label{j},'_elect_',DATA_EPOCH_REJECT.Label{k},'.png'));
                                 save(strcat(nom,'_CMC_',(mode{m}),'_',(vitesse{v}),'_muscle_',DATA_EPOCH_REJECT.Label{j},'_elect_',DATA_EPOCH_REJECT.Label{k},'.mat'),'eeg','emg','eegemg','srates','freq');
+                            
+clearvars EEG EEG_TEMP EMG EMG_TEMP MatricewithoutNaN
+
                             end
                         end
                     end
@@ -148,9 +151,9 @@ for x=1:1:length(F) % Pour chaque sujet
                         
                         
                         if mode{m} == 'LEN' | mode{m} == 'SHO'
-                            
                             MatricewithoutNaN=OutNaN(DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data);
-                            
+                        else
+                            MatricewithoutNaN=(DATA_EPOCH_REJECT.(nom).(mode{m}).(vitesse{v}).data);
                         end
                         
                         % Pour chaque muscle
